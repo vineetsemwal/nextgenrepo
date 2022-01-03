@@ -1,0 +1,18 @@
+#box1{
+    background-color:green;
+    color:white;
+    margin:20px;
+    
+}
+
+#box2{
+    background-color:red;
+    color:white;
+    
+}
+
+a[href="http://google.com"]{
+
+    background-color:red;
+    color:white;  
+}
