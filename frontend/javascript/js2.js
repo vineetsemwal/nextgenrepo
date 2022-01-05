@@ -18,3 +18,4 @@ function displayUser(user){
 
 displayUser(user1);
 displayUser(user2);
+displayUser();
