@@ -1,9 +1,5 @@
 class User{
-
-    userid;
-
-    username;
-
+  
     constructor(id,uname){
         this.userid=id;
         this.username=uname;
@@ -16,8 +12,7 @@ class User{
 }
 
 class Customer extends User {
-
-   
+  
     constructor(id,uname){
       super(id,uname);
       this.discount=20;
