@@ -29,7 +29,7 @@ class Color{
 
 }
 
-let black=Color.Black;
+let black:Color=Color.Black;
 console.log("name =",black.getColorName(),"value",black.getColorValue());
 console.log(black);
 
