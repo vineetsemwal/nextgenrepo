@@ -1,0 +1,33 @@
+<h3>{{testDesc}}</h3>
+
+<!--
+<div [textContent]="greet">
+
+</div>
+-->
+
+<div [hidden]="isHidden">
+Visible when not hidden
+</div>
+
+<a [href]="linkUrl">Go to google</a>
+<br>
+<button  (click)="increment()">Increment Counter</button>
+
+<br>
+Counter value is {{counter}}
+
+<br><br>
+<input name="textFormInput" #textInput  (keyup)="inputValueBtnClick(textInput.value)">
+<br>
+Input value is {{textInputValue}}
+<br>
+<br>
+
+two way binding demo
+<br>
+<input name="textFormInput2"  [(ngModel)]="textInput2" >
+<br>
+
+<br>
+text input is {{textInput2}}
