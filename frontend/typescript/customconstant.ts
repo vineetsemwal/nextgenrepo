@@ -15,15 +15,15 @@ class Color{
 
     }
 
-    getColorName(){
+    getColorName():string{
         return this.colorName;
     }
 
-    getColorValue(){
+    getColorValue():string{
         return this.colorValue;
     }
 
-   static getAll(){
+   static getAll():Color[]{
         return Color.colors;
     }
 
@@ -41,3 +41,4 @@ let colors:Color[]=Color.getAll();
 for(let color of colors){
     console.log(color.getColorName(), color.getColorValue());
 }
+
