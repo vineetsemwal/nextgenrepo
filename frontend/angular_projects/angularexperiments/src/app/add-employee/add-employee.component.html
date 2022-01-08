@@ -1,1 +1,37 @@
-<p>add-employee works!</p>
+<h3>Add Employee Template driven</h3>
+
+<form #myform="ngForm" (ngSubmit)="addEmployee(myform)" >
+
+<div>
+
+  <label>Employee Name</label>  
+
+  <div class="form-group">
+
+
+    <label> Enter name</label>
+
+    <input  class="form-control" name="empName" #nameCtrl="ngModel" placeholder="min 8 letters" [(ngModel)]="emp.empName">
+
+</div>
+
+<div class="form-group">
+
+
+    <label> Enter Age</label>
+
+    <input type="number" class="form-control" name="empAge" #ageCtrl="ngModel"  [(ngModel)]="emp.empAge" placeholder="between 21 and 60">
+
+</div>
+
+
+<button>Add Employee</button>
+</div>
+
+
+</form>
+
+<h3 *ngIf="employeeAdded">
+    Thank you, user got added
+   {{emp.empName}} {{emp.empAge}} 
+</h3>
