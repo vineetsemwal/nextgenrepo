@@ -1,0 +1,46 @@
+<h3>Pipes</h3>
+upper case
+{{"hello" | uppercase  }}
+<br>
+titlecase pipe 
+{{"good afternoon" | titlecase }}
+<br>
+json pipe
+{{emp |json}}
+<br>
+
+PercentPipe
+{{.80 | percent}}
+<br>
+
+{{date}}
+<br>
+date in short format {{date | date:'short'}}
+
+<br>
+
+only date {{date | date:'shortDate'}}
+
+<br>
+Currency pipe
+<br>
+Default currency {{100|currency}}
+<br>
+Currency Symbol prefixed {{100|currency:'INR'}}
+<br>
+Currency code prefixed  {{100|currency:'INR':'code'}}
+
+<br>
+Custom String length pipe
+{{"hello"| stringlength }}
+<br>
+{{str1| stringlength}}
+
+<br>
+Exists pipe
+{{strings|exists:'blue' }}
+
+<br>
+<button (click)="addNumber()">Add Number</button>
+
+{{numbers|exists:4}}

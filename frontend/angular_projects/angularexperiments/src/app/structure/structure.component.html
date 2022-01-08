@@ -1,0 +1,66 @@
+<h3>structural directive experiments , starts with *</h3>
+
+<div>
+
+    <h3 *ngIf="value%2==0;else elseBlock">
+        number is even
+
+    </h3>
+
+    <td>body</td>
+
+    <ng-template #elseBlock>
+        <h3>number is odd</h3>
+    </ng-template>
+
+</div>
+
+<h3>*ngFor usage</h3>
+
+
+<div  *ngFor="let fruit of fruits; let i=index">
+
+   
+
+    {{i+1}} {{fruit}}
+</div>
+
+
+<table border="1">
+
+    <tr>
+        <th>Id </th>
+        <th>Name</th>
+    </tr>
+
+
+    <tr *ngFor="let emp of employees;" [id]="emp.empId">
+
+        <td>
+            {{emp.empId}}
+        </td>
+
+        <td>
+            {{emp.empName}}
+        </td>
+
+    </tr>
+
+</table>
+
+
+<h3>*ngSwitchCase directive</h3>
+
+<div [ngSwitch]="10">
+
+    <div *ngSwitchCase="1">One </div>
+
+
+    <div *ngSwitchCase="2">two </div>
+
+
+    <div *ngSwitchCase="3">three </div>
+
+    <div *ngSwitchDefault> the default when no value matched</div>
+
+</div>

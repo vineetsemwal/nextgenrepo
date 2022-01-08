@@ -1,0 +1,21 @@
+<h3>Attributes directive experiment </h3>
+
+
+<div  [class.box]="true">
+red box 1
+</div>
+
+<br><br>
+<div [ngClass]="arr">
+
+    My red box 2
+
+</div>
+<div [style]=elementStyle1>
+    elementt 1 style
+</div>
+
+<div [ngStyle]="num%2==0?elementStyle1:elementStyle2">
+
+   element 2 style
+</div>
