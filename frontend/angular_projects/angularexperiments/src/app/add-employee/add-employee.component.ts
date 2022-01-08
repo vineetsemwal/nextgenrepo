@@ -15,6 +15,10 @@ export class AddEmployeeComponent  {
 
    addEmployee(myform:any):void{
    console.log(myform);
+   if (!myform.valid) {
+    myform.markAllAsTouched();
+    return;
+  }
    //const name=myform.value.empName;
    //const age=myform.value.empAge;
    //this.emp.empAge=age;

@@ -13,6 +13,10 @@
 
     <input  class="form-control" name="empName"  formControlName="empName" placeholder="min 8 letters">
 
+    <div *ngIf="(nameCtrl.touched || nameCtrl.dirty) && nameCtrl.errors!=null && nameCtrl.errors.required">
+     <small class="text-danger">Name is required  </small> 
+    </div>
+
 </div>
 
 <div class="form-group">
@@ -22,6 +26,10 @@
 
     <input type="number" class="form-control" name="empAge" formControlName="empAge"   placeholder="between 21 and 60">
 
+
+    <div *ngIf="(ageCtrl.touched || ageCtrl.dirty) && ageCtrl.errors!=null && ageCtrl.errors.forbiddenAge">
+      <small class="text-danger">Age should be between 21 and 60  </small> 
+     </div>
 </div>
 
 
@@ -30,6 +38,9 @@
 
 
 </form>
+
+
+
 
 <h3 *ngIf="employeeAdded">
     Thank you, user got added

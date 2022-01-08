@@ -11,7 +11,13 @@
 
     <label> Enter name</label>
 
-    <input  class="form-control" name="empName" #nameCtrl="ngModel" placeholder="min 8 letters" [(ngModel)]="emp.empName">
+    <input  class="form-control" name="empName" #nameCtrl="ngModel" required placeholder="min 8 letters" [(ngModel)]="emp.empName">
+
+
+    <div *ngIf="(nameCtrl.touched || nameCtrl.dirty) && nameCtrl.errors!=null && nameCtrl.errors.required">
+      <small class="text-danger">Name is required  </small> 
+     </div>
+ 
 
 </div>
 
