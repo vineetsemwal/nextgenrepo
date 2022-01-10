@@ -28,7 +28,7 @@
 
 
     <div *ngIf="isAgeValidationError()">
-      <small class="text-danger">{{ageCtrl.errors['forbiddenAge'].value}} </small> 
+      <small class="text-danger">{{getAgeValidationError()}} </small> 
      </div>
 </div>
 

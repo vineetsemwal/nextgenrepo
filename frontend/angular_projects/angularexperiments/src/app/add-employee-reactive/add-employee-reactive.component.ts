@@ -22,39 +22,54 @@ export class AddEmployeeReactiveComponent implements OnInit {
 
   constructor(builder: FormBuilder) {
     this.nameCtrl = builder.control('', [Validators.required]);
-    this.ageCtrl = builder.control('', [forbiddenAgeValidator(21,60)]);
+    this.ageCtrl = builder.control('', [forbiddenAgeValidator(21, 60)]);
     this.myform = builder.group({
       empName: this.nameCtrl,
       empAge: this.ageCtrl,
     });
   }
 
-  ngOnInit(){
-    console.log("inside init,form",this.myform);
+  ngOnInit() {
+    console.log("inside init,form", this.myform);
   }
 
- isAgeValidationError():boolean{
-  if(!this.isCommonValidationErr(this.ageCtrl)){
-    return false;
-  }    
-  
-   return this.ageCtrl.errors!=null   && this.ageCtrl.errors['forbiddenAge']
- }
+  isAgeValidationError(): boolean {
+    if (!this.isCommonValidationErr(this.ageCtrl)) {
+      return false;
+    }
 
- isNameValidationError():boolean{
-  if(!this.isCommonValidationErr(this.nameCtrl)){
-    return false;
+    return this.ageCtrl.errors != null && this.ageCtrl.errors['forbiddenAge']
   }
-  return  this.nameCtrl.errors!=null && this.nameCtrl.errors['required'];
- }
 
- isCommonValidationErr(checkFor:FormControl){
-  if(!checkFor.touched && !checkFor.dirty){
-    return false;
-  } 
-  return true;
- }
+  isNameValidationError(): boolean {
+    if (!this.isCommonValidationErr(this.nameCtrl)) {
+      return false;
+    }
+    return this.nameCtrl.errors != null && this.nameCtrl.errors['required'];
+  }
 
+  isCommonValidationErr(checkFor: FormControl) {
+    if (!checkFor.touched && !checkFor.dirty) {
+      return false;
+    }
+    return true;
+  }
+
+  getAgeValidationError() {
+    if (this.ageCtrl.errors == null) {
+      return "";
+    }
+    const errors = this.ageCtrl.errors;
+    const forbiddenErrObj=errors['forbiddenAge']
+    if(forbiddenErrObj==null){
+      return "";
+    }
+    const value = forbiddenErrObj.value;
+    if (value == null) {
+      return "";
+    }
+    return value;
+  }
 
   addEmployee(): void {
     console.log(this.myform);
