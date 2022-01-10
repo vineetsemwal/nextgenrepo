@@ -1,13 +1,13 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.startProject = void 0;
-const Welcome_1 = __importDefault(require("./Welcome"));
+const Welcome_1 = require("./Welcome");
 function startProject() {
-    (0, Welcome_1.default)();
+    const shape = new Welcome_1.Circle(5);
+    const canvas = new Welcome_1.Canvas(shape);
+    canvas.drawArea();
 }
 exports.startProject = startProject;
 startProject();
+//library
 //# sourceMappingURL=index.js.map

@@ -1,8 +1,11 @@
-import { Welcome1, Welcome2  } from './Welcome';
+import {Canvas,Square,Circle} from './Welcome';
 
 export function startProject(){
-  Welcome1();
-  Welcome2();
+  const shape=new Circle(5); 
+  const canvas=new Canvas(shape);
+  canvas.drawArea();
 }
 
 startProject();
+
+//library

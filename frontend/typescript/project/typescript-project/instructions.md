@@ -13,6 +13,6 @@ Add in tsconfig.json
 
 5)create simple index.ts
 
-6)npx tsc src/index.ts //compile
+6)npx tsc or just tsc
 
-7) now you can run generated js file with node
+7) now you can run generated js file with node foreg. node dist/index.js
