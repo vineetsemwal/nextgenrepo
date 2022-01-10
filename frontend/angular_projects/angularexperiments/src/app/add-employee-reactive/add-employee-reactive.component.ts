@@ -33,6 +33,29 @@ export class AddEmployeeReactiveComponent implements OnInit {
     console.log("inside init,form",this.myform);
   }
 
+ isAgeValidationError():boolean{
+  if(!this.isCommonValidationErr(this.ageCtrl)){
+    return false;
+  }    
+  
+   return this.ageCtrl.errors!=null   && this.ageCtrl.errors['forbiddenAge']
+ }
+
+ isNameValidationError():boolean{
+  if(!this.isCommonValidationErr(this.nameCtrl)){
+    return false;
+  }
+  return  this.nameCtrl.errors!=null && this.nameCtrl.errors['required'];
+ }
+
+ isCommonValidationErr(checkFor:FormControl){
+  if(!checkFor.touched && !checkFor.dirty){
+    return false;
+  } 
+  return true;
+ }
+
+
   addEmployee(): void {
     console.log(this.myform);
     if (!this.myform.valid) {
