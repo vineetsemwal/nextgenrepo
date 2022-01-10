@@ -13,7 +13,7 @@ import Employee from '../model/employee';
   templateUrl: './add-employee-reactive.component.html',
   styleUrls: ['./add-employee-reactive.component.css'],
 })
-export class AddEmployeeReactiveComponent {
+export class AddEmployeeReactiveComponent implements OnInit {
   nameCtrl: FormControl;
   ageCtrl: FormControl;
   myform: FormGroup;
@@ -22,12 +22,17 @@ export class AddEmployeeReactiveComponent {
 
   constructor(builder: FormBuilder) {
     this.nameCtrl = builder.control('', [Validators.required]);
-    this.ageCtrl = builder.control('', [forbiddenAgeValidator]);
+    this.ageCtrl = builder.control('', [forbiddenAgeValidator(21,60)]);
     this.myform = builder.group({
       empName: this.nameCtrl,
       empAge: this.ageCtrl,
     });
   }
+
+  ngOnInit(){
+    console.log("inside init,form",this.myform);
+  }
+
   addEmployee(): void {
     console.log(this.myform);
     if (!this.myform.valid) {

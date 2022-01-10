@@ -16,7 +16,7 @@ export class AddEmployeeComponent  {
    addEmployee(myform:any):void{
    console.log(myform);
    if (!myform.valid) {
-    myform.markAllAsTouched();
+    myform.form.markAllAsTouched();
     return;
   }
    //const name=myform.value.empName;

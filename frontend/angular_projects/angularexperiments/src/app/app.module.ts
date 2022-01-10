@@ -8,10 +8,11 @@ import { TestComponent } from './test/test.component';
 import { StructureComponent } from './structure/structure.component';
 import { AttributesComponent } from './attributes/attributes.component';
 import { PipesComponent } from './pipes/pipes.component';
-import { CustomLengthPipe } from './common/customlengthpipe';
+import { StringLengthPipe } from './common/stringlengthpipe';
 import { ElementExistsPipe } from './common/elementexistpipe';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { AddEmployeeReactiveComponent } from './add-employee-reactive/add-employee-reactive.component';
+import { ForbiddenAgeValidatorDirective } from './common/forbiddenAgeValidator';
 
 @NgModule({
   declarations: [
@@ -20,10 +21,11 @@ import { AddEmployeeReactiveComponent } from './add-employee-reactive/add-employ
     StructureComponent,
     AttributesComponent,
     PipesComponent,
-    CustomLengthPipe,
+    StringLengthPipe,
     ElementExistsPipe,
     AddEmployeeComponent,
-    AddEmployeeReactiveComponent
+    AddEmployeeReactiveComponent,
+    ForbiddenAgeValidatorDirective
   ],
   imports: [
     BrowserModule,
