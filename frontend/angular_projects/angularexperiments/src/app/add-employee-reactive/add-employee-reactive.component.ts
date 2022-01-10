@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { forbiddenAgeValidator } from '../common/forbiddenAgeValidator';
+import { EmployeeService } from '../employee.service';
 import Employee from '../model/employee';
 
 @Component({
@@ -19,8 +20,8 @@ export class AddEmployeeReactiveComponent implements OnInit {
   myform: FormGroup;
   employeeAdded = false;
   emp = new Employee('', 0);
-
-  constructor(builder: FormBuilder) {
+   result:Employee|undefined;
+  constructor(builder: FormBuilder, private service:EmployeeService) {
     this.nameCtrl = builder.control('', [Validators.required]);
     this.ageCtrl = builder.control('', [forbiddenAgeValidator(21, 60)]);
     this.myform = builder.group({
@@ -81,6 +82,9 @@ export class AddEmployeeReactiveComponent implements OnInit {
     const age = this.ageCtrl.value;
     this.emp.empAge = age;
     this.emp.empName = name;
+    this.service.add(this.emp);
+    this.result=this.emp;
+    this.emp=new Employee('',0); 
     console.log('employee', this.emp);
     this.employeeAdded = true;
   }

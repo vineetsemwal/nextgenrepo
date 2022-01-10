@@ -13,6 +13,8 @@ import { ElementExistsPipe } from './common/elementexistpipe';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { AddEmployeeReactiveComponent } from './add-employee-reactive/add-employee-reactive.component';
 import { ForbiddenAgeValidatorDirective } from './common/forbiddenAgeValidator';
+import { EmployeeService } from './employee.service';
+import { ListEmployeesComponent } from './list-employees/list-employees.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { ForbiddenAgeValidatorDirective } from './common/forbiddenAgeValidator';
     ElementExistsPipe,
     AddEmployeeComponent,
     AddEmployeeReactiveComponent,
-    ForbiddenAgeValidatorDirective
+    ForbiddenAgeValidatorDirective,
+    ListEmployeesComponent
   ],
   imports: [
     BrowserModule,
