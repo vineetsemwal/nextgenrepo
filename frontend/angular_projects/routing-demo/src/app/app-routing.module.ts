@@ -15,10 +15,8 @@ const routes: Routes = [
   { path: "contact", component: ContactUsComponent },
 
   { path: "home", component: HomeComponent },
-
-  {path:"employee", component:EmployeeDetailsComponent,pathMatch:"full"},
-
-  {path:"employee/id/**", component:EmployeeNotfoundComponent,pathMatch:"prefix"},
+ 
+  {path:"employee/:id", component:EmployeeDetailsComponent},
 
   {path:"**", component:NotFoundComponent}
 
