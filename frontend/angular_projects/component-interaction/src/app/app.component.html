@@ -1,0 +1,10 @@
+<h1>Parent</h1>
+
+<input [(ngModel)]="userInput" name="userInput">
+<br>
+Input user enter in parent : {{userInput}}
+
+Messge sent be child to parent is {{messageFromChild}} 
+
+<br>
+<child (childEvent)="messageReceivedFromChild($event)"   [parentInput]="userInput"> </child>
