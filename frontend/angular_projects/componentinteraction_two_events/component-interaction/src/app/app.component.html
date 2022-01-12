@@ -1,0 +1,21 @@
+<h1>Parent</h1>
+
+<input [(ngModel)]="userInput" name="userInput">
+<br>
+Input user enter in parent : {{userInput}}
+
+
+
+
+<h1 *ngIf="dayTime==='morning'">
+ Morning greeting received is : {{greetingMsg}} 
+</h1>
+
+
+
+<h1 *ngIf="dayTime==='evening'">
+  Evening greeting received is : {{greetingMsg}} 
+ </h1>
+
+<br>
+<child (childEvent)="messageReceivedFromChild($event)"   [parentInput]="userInput"> </child>
