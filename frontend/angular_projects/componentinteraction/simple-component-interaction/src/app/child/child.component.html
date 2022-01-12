@@ -7,3 +7,11 @@ input from parent : {{parentInput}}
 
 
 <button  (click)="onButtonClicked()">Send Message to parent</button>
+
+<div #childContent >
+child content we are using with @ViewChild 
+
+</div>
+
+<h3>projected content below</h3>
+<ng-content></ng-content>

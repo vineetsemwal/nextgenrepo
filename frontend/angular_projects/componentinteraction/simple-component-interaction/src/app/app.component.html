@@ -8,9 +8,19 @@ Input user enter in parent : {{userInput}}
 Messge sent from child to parent is {{messageFromChild}} 
 
 
-<h1 *ngIf="toggle">
-  I am visible and invisible based on even from child
-</h1>
+<br><br><br>
 
-<br>
-<child (childEvent)="messageReceivedFromChild($event)"   [parentInput]="userInput"> </child>
+<button (click)="changeChildVisibility()">Show/ Hide child</button>
+
+<br><br><br>
+
+<div *ngIf="toggleChild">
+
+<child (childEvent)="messageReceivedFromChild($event)"   [parentInput]="userInput">
+
+  <h3 #projectedContent>body of projected content 1</h3>
+
+</child>
+
+
+</div>
