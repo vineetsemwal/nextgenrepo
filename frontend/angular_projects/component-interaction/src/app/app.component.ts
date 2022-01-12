@@ -11,9 +11,12 @@ export class AppComponent {
 
   messageFromChild:string="";
 
+  toggle:boolean=false; 
+
    messageReceivedFromChild(receivedMsg:string){
      console.log("message received in parent", receivedMsg);
     this.messageFromChild=receivedMsg;
+    this.toggle=!this.toggle;
    }
 
 }

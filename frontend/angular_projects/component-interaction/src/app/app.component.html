@@ -4,7 +4,13 @@
 <br>
 Input user enter in parent : {{userInput}}
 
-Messge sent be child to parent is {{messageFromChild}} 
+
+Messge sent from child to parent is {{messageFromChild}} 
+
+
+<h1 *ngIf="toggle">
+  I am visible and invisible based on even from child
+</h1>
 
 <br>
 <child (childEvent)="messageReceivedFromChild($event)"   [parentInput]="userInput"> </child>
