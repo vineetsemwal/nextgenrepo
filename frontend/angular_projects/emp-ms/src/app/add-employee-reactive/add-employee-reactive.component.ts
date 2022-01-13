@@ -99,6 +99,7 @@ export class AddEmployeeReactiveComponent implements OnInit, OnDestroy {
     const observer:Observer<Employee>={
      next: (receivedResult:Employee)=>{
        console.log("****result received in add component",receivedResult);
+       this.employeeAdded=true;
       this.result=receivedResult;
       this.emp=new Employee('',undefined); 
      },
@@ -111,6 +112,6 @@ export class AddEmployeeReactiveComponent implements OnInit, OnDestroy {
     this.subscription= obs.subscribe(observer);
   
     console.log('employee', this.emp);
-    this.employeeAdded = true;
+    
   }
 }
