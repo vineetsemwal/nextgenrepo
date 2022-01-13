@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'observable-demo';
+  visible:boolean=true;
+
+  toggleVisibility(){
+   this.visible=!this.visible;
+  } 
 }
