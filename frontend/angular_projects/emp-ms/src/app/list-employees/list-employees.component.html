@@ -1,0 +1,16 @@
+<div style="margin-top:50px;">
+<h3>List Employees</h3>
+
+
+<div *ngFor="let emp of employees">
+
+    {{emp.empName}} {{emp.empAge}}
+
+</div>
+
+<div *ngIf="errorReceived" class="text-danger">
+ Error encountered {{errMsg}}
+</div>
+
+</div>
+

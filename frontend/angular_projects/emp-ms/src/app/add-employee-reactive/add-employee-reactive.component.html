@@ -1,0 +1,52 @@
+<h3>Add Employee Reactive Form/ Code Driven</h3>
+
+<form [formGroup]="myform" (ngSubmit)="addEmployee()" >
+
+<div>
+
+  <label>Employee Name</label>  
+
+  <div class="form-group">
+
+
+    <label> Enter name</label>
+
+    <input  class="form-control" name="empName"  formControlName="empName" placeholder="min 8 letters">
+
+    <div *ngIf="isNameValidationError()">
+     <small class="text-danger">Name is required  </small> 
+    </div>
+
+</div>
+
+<div class="form-group">
+
+
+    <label> Enter Age</label>
+
+    <input type="number" class="form-control" name="empAge"  formControlName="empAge"   placeholder="between 21 and 60">
+
+
+    <div *ngIf="isAgeValidationError()">
+      <small class="text-danger">{{getAgeValidationError()}} </small> 
+     </div>
+</div>
+
+
+<button class="btn btn-success">Add Employee</button>
+</div>
+
+
+</form>
+
+
+
+
+<h3 *ngIf="employeeAdded">
+    Thank you, user got added
+   {{result.empName}} {{result.empAge}} 
+</h3>
+
+<h3 *ngIf="errMsg">
+<small class="text-danger"> Error encountered {{errMsg}} </small>
+</h3>
