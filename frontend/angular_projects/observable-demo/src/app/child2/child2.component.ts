@@ -13,11 +13,27 @@ export class Child2Component implements OnInit {
 
   ngOnInit(): void {
     console.log("task assigned");  
+    console.log("started progress dialog when task is assigned");
     const obs:Observable<number>=this.doTask();
     console.log("before subscribed");
-    obs.subscribe((result:number)=>{
-       console.log("received result",result);
-    });
+
+    const observer={
+      next: (result:number)=>{
+        console.log("received result",result);
+     }
+     ,
+     error: (err:Error)=>{
+        console.log("error received", err);  
+     } 
+     ,
+    complete:()=>{
+      console.log("completed, hiding progress dialog");
+    }
+    };
+    
+    obs.subscribe(observer);
+   
+    
       console.log("after subscribed")
   }
 
@@ -33,7 +49,7 @@ export class Child2Component implements OnInit {
       subscriber.next(12);
       console.log("about to publish",13);    
       subscriber.next(13);
-      
+      subscriber.complete();
     }); 
      return obs;
   }

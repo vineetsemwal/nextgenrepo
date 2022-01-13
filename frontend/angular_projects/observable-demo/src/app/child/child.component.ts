@@ -9,6 +9,8 @@ import { Observable, Observer } from 'rxjs';
 export class ChildComponent implements OnInit {
   constructor() {}
 
+  errMsg:string="";
+
   addResult: number | undefined;
 
   ngOnInit(): void {
@@ -17,7 +19,9 @@ export class ChildComponent implements OnInit {
     let obs: Observable<number> = this.add(undefined, undefined);
     console.log('about to subscribe');
 
-    /* obs.subscribe(
+    /*
+    way 1 got deprecated in 13 + version
+    obs.subscribe(
           (result:number)=>{
            this.addResult=result;
            console.log("result received",result);
@@ -28,6 +32,7 @@ export class ChildComponent implements OnInit {
       );
 */
 
+// way 2
     const observer:Observer<number> = {
       next: (result: number) => {
         this.addResult = result;
@@ -35,6 +40,7 @@ export class ChildComponent implements OnInit {
       },
       error: (err) => {
         console.log('received err', err);
+        this.errMsg=err.message;
       },
       complete:()=>{
         console.log("completed" );
@@ -55,6 +61,7 @@ export class ChildComponent implements OnInit {
       console.log('about to publish result');
       subscriber.next(sum);
       console.log('result already published');
+      subscriber.complete();
     });
     return obs;
   }
