@@ -17,6 +17,7 @@ export class UrlGuard implements CanActivate{
        this.router.navigate(["/notfound"]);
        return false;
       }
+      //navigate user to not found if id is not a number
       const isNotNumber=isNaN(id);
       if(isNotNumber){
         this.router.navigate(["/notfound"]);

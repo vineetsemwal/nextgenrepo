@@ -1,0 +1,13 @@
+<h1>Sign In</h1>
+
+<form [formGroup]="formGroup" (ngSubmit)="onFormSubmit()">
+
+  Username:  <input formControlName="username" name="username">
+
+  <br>
+  password: <input formControlName="password" name="password">
+
+  <br>
+  <button>Submit</button>
+
+</form>
