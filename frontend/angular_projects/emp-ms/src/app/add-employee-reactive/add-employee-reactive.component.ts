@@ -20,7 +20,7 @@ export class AddEmployeeReactiveComponent implements OnInit, OnDestroy {
   ageCtrl: FormControl;
   myform: FormGroup;
   employeeAdded = false;
-  emp = new Employee('', undefined);
+  emp = new Employee('', 0);
    result:Employee|undefined;
   errMsg:string|undefined;
   subscription:Subscription|undefined;
@@ -101,7 +101,7 @@ export class AddEmployeeReactiveComponent implements OnInit, OnDestroy {
        console.log("****result received in add component",receivedResult);
        this.employeeAdded=true;
       this.result=receivedResult;
-      this.emp=new Employee('',undefined); 
+      this.emp=new Employee('',0); 
      },
      error:(err:Error)=>{
        console.error("error received",err);

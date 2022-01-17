@@ -14,7 +14,7 @@ export class ListEmployeesComponent implements OnInit, OnDestroy {
   employees:Employee[]=[];
   errMsg:string|undefined; 
   errorReceived:boolean=false;
-  subscription:Subscription;
+  subscription:Subscription|undefined;
   constructor(private service:EmployeeService) {
    }
   
@@ -41,7 +41,9 @@ export class ListEmployeesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    if(this.subscription){
     this.subscription.unsubscribe();
+    }
   }
 
     
