@@ -1,6 +1,6 @@
 export class Employee {
 
-    constructor(public id:string,public empName:string,public age:number){
+    constructor(public id:string,public empName:string,public empAge:number){
 
     }
 

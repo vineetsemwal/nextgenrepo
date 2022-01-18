@@ -1,0 +1,15 @@
+<h1 id="title">{{title}}</h1>
+
+<div id="emp" *ngIf="emp">
+<span id="empId" > {{emp.id}}</span>
+<span id="empName"> {{emp.empName}}</span>
+<span id="empAge"> {{emp.empAge}}</span>
+</div>
+
+
+<button id=increment (click)="increment()">
+    Increment count
+</button>
+<span id="counter">
+{{counter}}
+</span>
