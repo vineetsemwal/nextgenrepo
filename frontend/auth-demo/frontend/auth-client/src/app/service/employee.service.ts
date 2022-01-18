@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
 })
 export class EmployeeService {
 
-  constructor(private client:HttpClient, private authService:AuthService) { }
+  constructor(private client:HttpClient) { }
 
   fetchEmployeeByUsername(username:string):Observable<Employee>{
       const url=baseUrl+"/employees/byusername/"+username ;
