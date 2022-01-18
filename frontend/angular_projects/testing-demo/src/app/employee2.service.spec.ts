@@ -30,7 +30,7 @@ describe('EmployeeService', () => {
     obs.subscribe({
       next: (result:Employee)=>{
           console.log("custom verifying result");
-        expect(result).toBe(emp);
+        expect(result).toEqual(emp);
         
       }
     });

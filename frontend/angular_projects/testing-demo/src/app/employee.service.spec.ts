@@ -27,7 +27,7 @@ describe('EmployeeService', () => {
     const obs:Observable<Employee>=service.fetchEmployeeById("1");
     obs.subscribe({
       next: (result:Employee)=>{
-        expect(result).toBe(emp);
+        expect(result).toEqual(emp);
       }
     });
  
