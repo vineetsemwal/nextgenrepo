@@ -15,7 +15,7 @@ export class EmployeeService {
   fetchEmployeeByUsername(username:string):Observable<Employee>{
     const token:string|null=this.authService.getToken();
     if(token==null){
-      return new Observable(subscriber=>subscriber.error("user not logged in"));
+      return new Observable(subscriber=>subscriber.error(new Error("user not logged in")));
     }
     const url=baseUrl+"/employees/byusername/"+username ;
     //const options={headers:{"token":token}};
