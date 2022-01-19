@@ -12,7 +12,7 @@ export class EmployeeService {
 
   fetchEmployeeById(id:string):Observable<Employee>{
     console.log("client is ", this.client);
-    const url="http://localhost:8080/employees/"+id;
+    const url="http://localhost:3000/employees/"+id;
     const obs:Observable<Employee>=this.client.get<Employee>(url);
      return obs;
   }

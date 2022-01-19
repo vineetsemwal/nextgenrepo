@@ -22,7 +22,7 @@ describe('EmployeeService', () => {
   });
 
   it("fetchEmployeeById, id is 1",()=>{
-    const url="http://localhost:8080/employees/1";
+    const url="http://localhost:3000/employees/1";
     const emp:Employee=new Employee("1","remjith",26);
     const obs:Observable<Employee>=service.fetchEmployeeById("1");
     obs.subscribe({

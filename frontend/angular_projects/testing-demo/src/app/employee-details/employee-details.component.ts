@@ -12,7 +12,7 @@ export class EmployeeDetailsComponent implements OnInit {
   title="employee details";
   emp:Employee|undefined; 
   counter:number=0;
-  constructor(private service:EmployeeService) { }
+  constructor(public service:EmployeeService) { }
 
   ngOnInit(): void {
    let obs:Observable<Employee>=this.service.fetchEmployeeById("1");
