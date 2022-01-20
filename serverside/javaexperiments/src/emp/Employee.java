@@ -1,6 +1,6 @@
 package emp;
 
-public class Employee {
+public class Employee implements Comparable<Employee>{
 
     private int id;
     private String name;
@@ -39,5 +39,31 @@ public class Employee {
     @Override
     public String toString() {
         return id+"-"+name+"-"+age;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj ==this){
+            return true;
+        }
+
+        if(obj==null || !obj.getClass().equals(Employee.class)){
+            return false;
+        }
+        Employee that=(Employee) obj;
+        return id==that.id;
+    }
+
+    @Override
+    public int compareTo(Employee other) {
+       int compareCode=id-other.id;
+       return compareCode;
+
     }
 }

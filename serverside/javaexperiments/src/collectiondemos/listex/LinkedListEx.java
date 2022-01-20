@@ -2,15 +2,16 @@ package collectiondemos.listex;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
-public class ArrayListEx {
+public class LinkedListEx {
 
     public static void main(String[] args){
         List<String>fruits=new ArrayList<>();
         fruits.add("apple");
         fruits.add("mango");
-        List<String> list=new ArrayList<>();
+        List<String> list=new LinkedList<>();
         list.add("one");
         list.add("two");
         list.add("two");
