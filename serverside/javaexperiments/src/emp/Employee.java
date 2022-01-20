@@ -35,4 +35,9 @@ public class Employee {
     public void setAge(byte age) {
         this.age = age;
     }
+
+    @Override
+    public String toString() {
+        return id+"-"+name+"-"+age;
+    }
 }
