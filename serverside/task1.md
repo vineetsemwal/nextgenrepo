@@ -18,7 +18,7 @@ ElectronicsStudent extends Student{
 
 }
 
-ComputerScienceStudent extends Customer{
+ComputerScienceStudent extends Student{
 
 
  language: String
