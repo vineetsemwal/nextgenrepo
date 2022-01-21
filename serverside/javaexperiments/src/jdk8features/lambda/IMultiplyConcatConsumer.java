@@ -1,7 +1,7 @@
 package jdk8features.lambda;
 
 @FunctionalInterface
-public interface IMultiplyConcat {
+public interface IMultiplyConcatConsumer {
 
     void concatAndPrint(String msg1, int times);
 

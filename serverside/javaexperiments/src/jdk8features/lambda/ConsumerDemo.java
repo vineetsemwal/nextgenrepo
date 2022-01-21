@@ -11,7 +11,7 @@ public class ConsumerDemo {
         printer1.print("welcome1");
         printer2.accept("welcome2");
 
-        IMultiplyConcat bi1=(msg,times)->{
+        IMultiplyConcatConsumer bi1=(msg, times)->{
           String result="";
           for(int i=0;i<times;i++){
               result=result+msg;
