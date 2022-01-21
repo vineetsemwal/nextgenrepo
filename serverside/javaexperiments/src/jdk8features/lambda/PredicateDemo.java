@@ -32,5 +32,8 @@ public class PredicateDemo {
         };
         boolean isEven4=bi2.test("hi",5);
         System.out.println("is even="+isEven4);
+
     }
+
+
 }
