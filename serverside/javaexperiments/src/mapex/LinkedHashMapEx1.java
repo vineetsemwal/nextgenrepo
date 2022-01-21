@@ -2,15 +2,12 @@ package mapex;
 
 import emp.Employee;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-public class MapEx1 {
+public class LinkedHashMapEx1 {
     public static void main(String[] args){
        //keys are unique, values can be duplicated
-        Map<Integer, Employee>map=new HashMap<>();
+        Map<Integer, Employee>map=new LinkedHashMap<>();
         Employee emp1=new Employee(1,"rishwanth",(byte)25);
         Employee emp2=new Employee(2,"ramanna",(byte)25);
         Employee emp3=new Employee(3,"vinay",(byte)25);
@@ -18,6 +15,7 @@ public class MapEx1 {
         map.put(1,emp1);
         map.put(2,emp2);
         map.put(2,emp2);
+        System.out.println(map);
         int size=map.size();
         System.out.println("size of map="+size);
         Employee fetchedForKey1=map.get(1);
