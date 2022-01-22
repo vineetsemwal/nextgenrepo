@@ -42,13 +42,5 @@ public class OptionalDemo {
         return Optional.empty();
     }
 
-    String fetchElementStartingFromZoo2(Collection<String> collection) {
-        for (String iterated : collection) {
-            if (iterated.startsWith("zoo")) {
-                return iterated;
-            }
-        }
-        return "";
-    }
 
 }

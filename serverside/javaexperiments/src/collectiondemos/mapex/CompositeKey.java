@@ -1,4 +1,4 @@
-package mapex;
+package collectiondemos.mapex;
 
 public class CompositeKey implements Comparable<CompositeKey>{
 

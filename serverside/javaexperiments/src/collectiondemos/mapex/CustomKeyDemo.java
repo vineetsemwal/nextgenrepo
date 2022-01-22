@@ -1,4 +1,4 @@
-package mapex;
+package collectiondemos.mapex;
 
 import java.util.Comparator;
 import java.util.Map;

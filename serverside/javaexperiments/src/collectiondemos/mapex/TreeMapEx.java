@@ -1,4 +1,4 @@
-package mapex;
+package collectiondemos.mapex;
 
 import emp.Employee;
 

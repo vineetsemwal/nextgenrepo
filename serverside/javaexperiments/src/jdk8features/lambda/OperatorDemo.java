@@ -13,10 +13,11 @@ public class OperatorDemo {
         System.out.println("result1="+result1);
         System.out.println("resul2="+result2);
 
+        /*
         UnaryOperator<Integer>operator3=UnaryOperator.identity();
         int result3=operator3.apply(10);
         System.out.println("reult3="+result3);
-
+*/
         IAdder adder1=(num1,num2)->num1+num2;
         int addResult1=adder1.add(5,7);
         System.out.println("adder1: add result="+addResult1);
