@@ -3,6 +3,10 @@ package com.mycompany.testdemo;
 public class Calculator {
 
     private Adder adder;
+
+    public Calculator(){
+    }
+
     public Calculator(Adder adder){
         this.adder=adder;
     }
