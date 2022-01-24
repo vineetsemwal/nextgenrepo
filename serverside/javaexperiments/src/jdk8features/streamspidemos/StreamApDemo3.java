@@ -4,6 +4,7 @@ import emp.Employee;
 
 import java.util.*;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
 public class StreamApDemo3 {
@@ -41,7 +42,7 @@ public class StreamApDemo3 {
          * convert List<Employee> to Map<Integer,Employee>
          */
         Function<Employee,Integer>keyFun=  emp->emp.getId();
-        Function<Employee,Employee>valFun=emp->emp;
+        Function<Employee,Employee>valFun=UnaryOperator.identity();
         Map<Integer,Employee>map=list.stream()
                 .collect(Collectors.toMap(keyFun,valFun  ));
 
