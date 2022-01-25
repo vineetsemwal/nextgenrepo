@@ -2,10 +2,7 @@ package com.mycompany.javaconfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 
 import javax.annotation.PostConstruct;
@@ -14,13 +11,12 @@ import javax.annotation.PostConstruct;
 @ComponentScan("com.mycompany.javaconfig")
 @Configuration
 public class JavaConfiguration {
-
-/*    @Bean
+    @Bean
     public Circle circle(){
         Circle circle=new Circle();
         return circle;
     }
-*/
+
     @Autowired
     private Environment environment;
 
