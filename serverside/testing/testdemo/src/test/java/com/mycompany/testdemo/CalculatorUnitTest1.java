@@ -73,7 +73,11 @@ class CalculatorUnitTest1 {
         doThrow(UnsupportedOperationException.class).when(spy).someThing2();
         Executable executable = () -> spy.add(str1, str2);
         assertThrows(InvalidStringException.class, executable);
+        verify(spy).someThing1();
+        verify(spy).someThing2();
     }
+
+
 
 
 }
