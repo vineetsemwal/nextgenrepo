@@ -70,6 +70,6 @@ FrontEndClient{
 
 name, field, device, language can't be empty or null
 
-id, age can't be negative
+id, age can't be negative, age sgould be between 17 and 22
 
 
