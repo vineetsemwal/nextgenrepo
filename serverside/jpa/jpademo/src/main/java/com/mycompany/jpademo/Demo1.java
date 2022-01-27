@@ -48,6 +48,8 @@ public class Demo1 {
     }
 
 
+
+
     public void display(Employee emp) {
         System.out.println("emp-" + emp.getId() + "-" + emp.getName() + "-" + emp.getAge());
     }
