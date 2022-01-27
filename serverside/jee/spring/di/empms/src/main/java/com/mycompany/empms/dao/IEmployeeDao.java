@@ -4,6 +4,7 @@ import com.mycompany.empms.entity.Employee;
 import com.mycompany.empms.exceptions.EmployeeNotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IEmployeeDao {
 
@@ -11,9 +12,9 @@ public interface IEmployeeDao {
 
     Employee update(Employee employee);
 
-    Employee updateName(long empId, int age);
+    Employee updateAge(long empId, int newAge);
 
-    Employee findById(long id);
+    Optional<Employee> findById(long id);
 
     boolean existById(long id);
 

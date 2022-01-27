@@ -15,7 +15,7 @@ public interface IEmployeeService {
     Employee update(Employee employee)
             throws InvalidEmployeeNameException, InvalidEmployeeAgeException, EmployeeNotFoundException, InvalidEmployeeIdException;
 
-    Employee findById(long id) throws InvalidEmployeeIdException;
+    Employee findById(long id) throws InvalidEmployeeIdException, EmployeeNotFoundException;
 
     List<Employee> findAll();
 

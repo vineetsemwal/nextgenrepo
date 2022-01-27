@@ -25,9 +25,9 @@ public class EmployeeDaoImpl implements IEmployeeDao {
     }
 
     @Override
-    public Employee updateName(long empId, int age) {
-        Employee emp = findById(empId);
-        emp.setId(age);
+    public Employee updateAge(long empId, int newAge) {
+        Employee emp = store.get(empId);
+        emp.setId(newAge);
         return emp;
     }
 
@@ -43,8 +43,13 @@ public class EmployeeDaoImpl implements IEmployeeDao {
     }
 
     @Override
-    public Employee findById(long id) {
-        return store.get(id);
+    public Optional<Employee> findById(long id) {
+        boolean exists= store.containsKey(id);
+        if(exists){
+          Employee emp=store.get(id);
+           return Optional.of(emp);
+        }
+        return Optional.empty();
     }
 
     @Override

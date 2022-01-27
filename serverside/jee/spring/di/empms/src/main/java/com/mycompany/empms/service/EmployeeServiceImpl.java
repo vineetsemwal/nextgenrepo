@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeServiceImpl implements IEmployeeService {
@@ -44,10 +45,13 @@ public class EmployeeServiceImpl implements IEmployeeService {
     }
 
     @Override
-    public Employee findById(long id) throws InvalidEmployeeIdException {
+    public Employee findById(long id) throws InvalidEmployeeIdException, EmployeeNotFoundException {
         validateId(id);
-        Employee employee = dao.findById(id);
-        return employee;
+        Optional<Employee> optional = dao.findById(id);
+        if(optional.isPresent()){
+            return optional.get();
+        }
+        throw new EmployeeNotFoundException("employee doesn't exist for id="+id);
     }
 
     @Override
