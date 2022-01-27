@@ -7,10 +7,10 @@
     <persistence-unit name="empms" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:testdb" />
-            <property name="javax.persistence.jdbc.user" value="tom" />
-            <property name="javax.persistence.jdbc.password" value="jerry" />
-            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/empdb" />
+            <property name="javax.persistence.jdbc.user" value="root" />
+            <property name="javax.persistence.jdbc.password" value="scooby" />
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <!-- create, create-drop, validate, update -->
             <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
