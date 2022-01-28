@@ -30,13 +30,7 @@ public class Department {
         this.deptName = deptName;
     }
 
-
-    //optional, required when you want to configure your join table
-    @JoinTable(name="employee_address",joinColumns=@JoinColumn(name="dept_id")
-    ,inverseJoinColumns = @JoinColumn(name = "emp_id")
-    )
-    //required
-     @OneToMany
+     @OneToMany(mappedBy="department")
      private Set<Employee> employees;
 
     public Set<Employee> getEmployees() {
