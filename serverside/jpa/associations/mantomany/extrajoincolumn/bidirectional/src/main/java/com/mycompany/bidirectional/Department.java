@@ -1,4 +1,4 @@
-package com.mycompany.singledirectional;
+package com.mycompany.bidirectional;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -28,22 +28,6 @@ public class Department {
 
     public void setDeptName(String deptName) {
         this.deptName = deptName;
-    }
-
-
-    //optional, required when you want to configure your join table
-    @JoinTable(name="employee_departments",joinColumns=@JoinColumn(name="dept_id")
-            ,inverseJoinColumns = @JoinColumn(name = "emp_id")
-    )
-     @ManyToMany
-     private Set<Employee> employees;
-
-    public Set<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
     }
 
     @Override
