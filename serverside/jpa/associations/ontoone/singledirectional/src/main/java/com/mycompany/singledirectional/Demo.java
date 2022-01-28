@@ -23,7 +23,7 @@ public class Demo {
         address.setCity("mumbai");
         address.setState("maha");
         address.setFlatNumber("201 B");
-        em.persist(address);
+      //  em.persist(address);
 
         Employee employee=new Employee();
         employee.setName("rajiv");

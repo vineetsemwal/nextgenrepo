@@ -1,9 +1,5 @@
 package com.mycompany.singledirectional;
 
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -18,11 +14,6 @@ public class Employee {
 
     @Column(nullable=false)
     private int age;
-
-    @JoinColumn(name="addressid")
-    @Cascade(CascadeType.ALL)
-    @OneToOne
-    private Address address;
 
     public Employee() {}
 
@@ -53,14 +44,6 @@ public class Employee {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     @Override
