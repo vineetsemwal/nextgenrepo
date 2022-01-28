@@ -43,7 +43,7 @@ public class StreamApDemo3 {
          */
         Function<Employee,Integer>keyFun=  emp->emp.getId();
         Function<Employee,Employee>valFun=UnaryOperator.identity();
-        Map<Integer,Employee>map=list.stream()
+        Map<Integer,Employee>map=list.stream().limit()
                 .collect(Collectors.toMap(keyFun,valFun  ));
 
         map.keySet().stream().forEach(key->System.out.println("key="+key+"value="+ map.get(key)));

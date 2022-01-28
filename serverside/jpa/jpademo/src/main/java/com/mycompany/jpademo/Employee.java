@@ -12,6 +12,7 @@ public class Employee {
     @Column(name="empname",nullable=false)
     private String name;
 
+    @Column(nullable=false)
     private int age;
 
     public Employee() {}
