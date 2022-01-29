@@ -23,46 +23,38 @@ public class Demo {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
-        Department department1=new Department();
+        Department department1 = new Department();
         department1.setDeptName("dev");
         em.persist(department1);
 
-        Department department2=new Department();
+        Department department2 = new Department();
         department2.setDeptName("testing");
         em.persist(department2);
 
 
-        Employee employee1=new Employee();
+        Employee employee1 = new Employee();
         employee1.setName("rajiv");
         employee1.setAge(28);
         em.persist(employee1);
 
-        Employee employee2=new Employee();
+        Employee employee2 = new Employee();
         employee2.setName("ramanna");
         employee2.setAge(28);
         em.persist(employee2);
 
-
-        LocalDate joinedDate1=LocalDate.of(2022,1,10);
-        EmployeeDepartment employee1Dept1=new EmployeeDepartment(employee1,department1);
-        employee1Dept1.setJoinedDate(joinedDate1);
-        em.persist(employee1Dept1);
-
-
-        LocalDate emp2Dept1JoinedDate=LocalDate.of(2022,1,20);
-        EmployeeDepartment employee2Dept1=new EmployeeDepartment(employee2,department1);
-        employee2Dept1.setJoinedDate(emp2Dept1JoinedDate);
-        em.persist(employee2Dept1);
-
-
-
-        LocalDate emp2Dept2JoinedDate=LocalDate.of(2022,1,27);
-        EmployeeDepartment employee2Dept2=new EmployeeDepartment(employee2,department2);
-        employee2Dept2.setJoinedDate(emp2Dept2JoinedDate);
-        em.persist(employee2Dept2);
-
-
         transaction.commit();
+
+        LocalDate joinedDate1 = LocalDate.of(2022, 1, 10);
+        addEmployeeToDepartment(department1, employee1, joinedDate1);
+
+
+        LocalDate emp2Dept1JoinedDate = LocalDate.of(2022, 1, 20);
+        addEmployeeToDepartment(department1, employee2, emp2Dept1JoinedDate);
+
+
+        LocalDate emp2Dept2JoinedDate = LocalDate.of(2022, 1, 27);
+        addEmployeeToDepartment(department2, employee2, emp2Dept2JoinedDate);
+
 
         System.out.println("****employees inserted");
         displayEmployee(employee1);
@@ -78,12 +70,22 @@ public class Demo {
         emf.close();
     }
 
+    EmployeeDepartment addEmployeeToDepartment(Department department, Employee employee, LocalDate joinedDate) {
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        EmployeeDepartment employeeDepartment = new EmployeeDepartment(employee, department);
+        employeeDepartment.setJoinedDate(joinedDate);
+        em.persist(employeeDepartment);
+        transaction.commit();
+        return employeeDepartment;
+    }
 
-    public List<EmployeeDepartment>findEmployeesByDepartment(Department department){
-        String queryStr="from EmployeeDepartment where department=:dept";
-        TypedQuery<EmployeeDepartment>query =em.createQuery(queryStr,EmployeeDepartment.class);
-        query.setParameter("dept",department);
-        List<EmployeeDepartment>list= query.getResultList();
+
+    public List<EmployeeDepartment> findEmployeesByDepartment(Department department) {
+        String queryStr = "from EmployeeDepartment where department=:dept";
+        TypedQuery<EmployeeDepartment> query = em.createQuery(queryStr, EmployeeDepartment.class);
+        query.setParameter("dept", department);
+        List<EmployeeDepartment> list = query.getResultList();
         return list;
     }
 
@@ -93,12 +95,12 @@ public class Demo {
 
     }
 
-    public void  displayDepartment(Department department){
-        System.out.println("department-"+department.getId()+" "+department.getDeptName());
-        List<EmployeeDepartment>employees=findEmployeesByDepartment(department);
-        employees.stream().forEach(empdept->{
-           System.out.print("joined Date="+empdept.getJoinedDate());
-           displayEmployee(empdept.getEmployee());
+    public void displayDepartment(Department department) {
+        System.out.println("department-" + department.getId() + " " + department.getDeptName());
+        List<EmployeeDepartment> employees = findEmployeesByDepartment(department);
+        employees.stream().forEach(empdept -> {
+            System.out.print("joined Date=" + empdept.getJoinedDate());
+            displayEmployee(empdept.getEmployee());
         });
     }
 
