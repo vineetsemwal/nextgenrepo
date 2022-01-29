@@ -1,7 +1,8 @@
-package com.mycompany.bidirectional;
+package com.mycompany.singledirectional;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Table(name="employees_data")
 @Entity
@@ -15,9 +16,8 @@ public class Employee {
     @Column(nullable=false)
     private int age;
 
-    @JoinColumn(name="addr_id",nullable=false)
-    @OneToOne
-    private Address address;
+    @ManyToMany(mappedBy="employees")
+    private Set<Department> departments;
 
     public Employee() {}
 
@@ -50,12 +50,12 @@ public class Employee {
         this.age = age;
     }
 
-    public Address getAddress() {
-        return address;
+    public Set<Department> getDepartments() {
+        return departments;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setDepartments(Set<Department> departments) {
+        this.departments = departments;
     }
 
     @Override

@@ -21,37 +21,40 @@ public class Demo {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
-        Department department1=new Department();
+        Department department1 = new Department();
         department1.setDeptName("dev");
         em.persist(department1);
 
-        Department department2=new Department();
+        Department department2 = new Department();
         department2.setDeptName("testing");
         em.persist(department2);
 
 
-        Employee employee1=new Employee();
+        Employee employee1 = new Employee();
         employee1.setName("rajiv");
         employee1.setAge(28);
         em.persist(employee1);
 
 
-        Employee employee2=new Employee();
+        Employee employee2 = new Employee();
         employee2.setName("ramanna");
         employee2.setAge(28);
         em.persist(employee2);
 
-
-        Employee employee3=new Employee();
+        Employee employee3 = new Employee();
         employee3.setName("piyush");
         employee3.setAge(28);
         em.persist(employee3);
+
         transaction.commit();
 
-        addEmployeeToDepartment(department1,employee1);
-        addEmployeeToDepartment(department1,employee2);
-        addEmployeeToDepartment(department2,employee2);
-        addEmployeeToDepartment(department2,employee3);
+
+        addEmployeeToDepartment(department1, employee1);
+        addEmployeeToDepartment(department1, employee2);
+
+        addEmployeeToDepartment(department2, employee2);
+        addEmployeeToDepartment(department2, employee3);
+
 
         System.out.println("****employees inserted");
         displayEmployee(employee1);
@@ -80,17 +83,33 @@ public class Demo {
         em.merge(department);
         transaction.commit();
 
+        Set<Department> departments = employee.getDepartments();
+        if (departments == null) {
+            departments = new HashSet<>();
+            employee.setDepartments(departments);
+        }
+        departments.add(department);
     }
 
 
     public void displayEmployee(Employee emp) {
         System.out.println("emp-" + emp.getId() + "-" + emp.getName() + "-" + emp.getAge());
+        System.out.println("***displaying departments of employee below");
 
+        Set<Department> departments = emp.getDepartments();
+        departments.stream().forEach((dept) -> {
+            System.out.println("department-" + dept.getId() + " " + dept.getDeptName());
+            Set<Employee> employees = dept.getEmployees();
+            Consumer<Employee> consumer = (empArg) -> {
+                System.out.println("emp-" + empArg.getId() + "-" + empArg.getName() + "-" + empArg.getAge());
+            };
+            employees.stream().forEach(consumer);
+        });
     }
 
-    public void  displayDepartment(Department department){
-        System.out.println("department-"+department.getId()+" "+department.getDeptName());
-        Set<Employee>employees=department.getEmployees();
+    public void displayDepartment(Department department) {
+        System.out.println("department-" + department.getId() + " " + department.getDeptName());
+        Set<Employee> employees = department.getEmployees();
         employees.stream().forEach(this::displayEmployee);
     }
 

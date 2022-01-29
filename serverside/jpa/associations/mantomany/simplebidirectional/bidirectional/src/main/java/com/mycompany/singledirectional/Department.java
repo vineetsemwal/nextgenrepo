@@ -32,7 +32,7 @@ public class Department {
 
 
     //optional, required when you want to configure your join table
-    @JoinTable(name="employee_department",joinColumns=@JoinColumn(name="dept_id")
+    @JoinTable(name="employee_departments",joinColumns=@JoinColumn(name="dept_id")
             ,inverseJoinColumns = @JoinColumn(name = "emp_id")
     )
      @ManyToMany
