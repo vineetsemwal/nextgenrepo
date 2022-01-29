@@ -58,10 +58,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Transactional
     @Override
     public EmployeeDetails updateEmployeeDetails(UpdateEmployeeRequest requestData) throws InvalidEmployeeNameException, InvalidEmployeeAgeException, EmployeeNotFoundException, InvalidEmployeeIdException {
-        Employee employee = new Employee();
-        employee.setId(requestData.getId());
-        employee.setName(requestData.getName());
-        employee.setAge(requestData.getAge());
+        Employee employee = employeeUtil.toEmployee(requestData);
         employee = update(employee);
         EmployeeDetails desired = employeeUtil.toEmployeeDetails(employee);
         return desired;
