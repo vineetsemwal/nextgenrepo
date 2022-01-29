@@ -28,14 +28,13 @@ public class EmployeeRestController {
 
     @GetMapping("/byid/{id}")
     public EmployeeDetails fetchById(@PathVariable long id) throws Exception {
-      Employee emp=service.findById(id);
-      EmployeeDetails response=util.toEmployeeDetails(emp);
+      EmployeeDetails response=service.findEmployeeDetailsById(id);
       return response;
     }
 
     @GetMapping("/all")
-    public List<Employee> fetchAll(){
-        List<Employee>list=service.findAll();
+    public List<EmployeeDetails> fetchAll(){
+        List<EmployeeDetails>list=service.findAllEmployeeDetails();
         return list;
     }
 
@@ -44,20 +43,14 @@ public class EmployeeRestController {
     @PostMapping("/add")
     //@RequestMapping(value = "/add",method= RequestMethod.POST)
     public EmployeeDetails add(@RequestBody AddEmployeeRequest  requestData) throws Exception{
-       Employee employee =service.add(requestData.getName(),requestData.getAge());
-       EmployeeDetails response=util.toEmployeeDetails(employee);
+       EmployeeDetails response =service.add(requestData);
        return response;
     }
 
     //@RequestMapping(value = "/add",method= RequestMethod.PUT)
     @PutMapping("/update")
-    public EmployeeDetails update(@RequestBody UpdateEmployeeRequest requestDate) throws Exception{
-        Employee employee=new Employee();
-        employee.setId(requestDate.getId());
-        employee.setName(requestDate.getName());
-        employee.setAge(requestDate.getAge());
-        employee=service.update(employee);
-        EmployeeDetails response=util.toEmployeeDetails(employee);
+    public EmployeeDetails update(@RequestBody UpdateEmployeeRequest requestData) throws Exception{
+        EmployeeDetails response=service.updateEmployeeDetails(requestData);
         return response;
     }
 

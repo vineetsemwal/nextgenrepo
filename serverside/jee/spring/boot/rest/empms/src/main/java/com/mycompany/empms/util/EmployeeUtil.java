@@ -4,6 +4,11 @@ import com.mycompany.empms.dto.EmployeeDetails;
 import com.mycompany.empms.entity.Employee;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 @Component
 public class EmployeeUtil {
 
@@ -13,6 +18,12 @@ public class EmployeeUtil {
        details.setName(employee.getName());
        details.setAge(employee.getAge());
        return details;
+   }
+
+   public List<EmployeeDetails> toListEmployees(Collection<Employee> employees){
+       Function<Employee,EmployeeDetails>function=this::toEmployeeDetails;
+      List<EmployeeDetails>desired= employees.stream().map(function).collect(Collectors.toList());
+      return desired;
    }
 
 }

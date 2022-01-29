@@ -1,6 +1,5 @@
 package com.mycompany.empms;
 
-import com.mycompany.empms.frontend.FrontEndClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
