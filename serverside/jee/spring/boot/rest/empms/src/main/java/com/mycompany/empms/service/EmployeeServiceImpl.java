@@ -78,6 +78,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
         throw new EmployeeNotFoundException("employee doesn't exist for id=" + id);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public EmployeeDetails findEmployeeDetailsById(long id) throws InvalidEmployeeIdException, EmployeeNotFoundException {
         Employee employee = findById(id);
