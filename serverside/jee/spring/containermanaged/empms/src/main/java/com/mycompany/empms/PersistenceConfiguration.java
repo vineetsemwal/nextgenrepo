@@ -1,4 +1,5 @@
 package com.mycompany.empms;
+
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +23,9 @@ import java.util.Properties;
 @PropertySource("classpath:application.properties")
 @ComponentScan("com.mycompany.empms")
 @Configuration
-public class PersistenceConfiguration{
+public class PersistenceConfiguration {
 
-    private static final Logger Log= LoggerFactory.getLogger(PersistenceConfiguration.class);
+    private static final Logger Log = LoggerFactory.getLogger(PersistenceConfiguration.class);
 
     @Autowired
     private Environment environment;
@@ -65,10 +66,10 @@ public class PersistenceConfiguration{
         Properties properties = new Properties();
         String dialect = environment.getProperty("spring.jpa.properties.hibernate.dialect");
         String ddlAuto = environment.getProperty("spring.jpa.hibernate.ddl-auto");
-       // String showSql = environment.getProperty("hibernate.show_sql");
+        // String showSql = environment.getProperty("hibernate.show_sql");
         properties.setProperty("hibernate.dialect", dialect);
         properties.setProperty("hibernate.hbm2ddl.auto", ddlAuto);
-       // properties.setProperty("hibernate.show_sql", showSql);
+        // properties.setProperty("hibernate.show_sql", showSql);
         //  properties.setProperty("spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation", "true");
         return properties;
     }

@@ -13,7 +13,7 @@ import java.util.*;
 public class EmployeeDaoImpl implements IEmployeeDao {
 
     @PersistenceContext
-   // @Autowired
+    // @Autowired
     private EntityManager entityManager;
 
     @Override
@@ -23,37 +23,37 @@ public class EmployeeDaoImpl implements IEmployeeDao {
 
     @Override
     public Employee updateAge(long empId, int newAge) {
-       Employee employee = entityManager.find(Employee.class, empId);
+        Employee employee = entityManager.find(Employee.class, empId);
         employee.setAge(newAge);
-        employee=entityManager.merge(employee);
+        employee = entityManager.merge(employee);
         return employee;
     }
 
     @Override
     public boolean existById(long id) {
-        Optional<Employee>optional=findById(id);
+        Optional<Employee> optional = findById(id);
         return optional.isPresent();
     }
 
     @Override
     public Employee update(Employee employee) {
-      employee=entityManager.merge(employee);
-      return employee;
+        employee = entityManager.merge(employee);
+        return employee;
     }
 
     @Override
     public Optional<Employee> findById(long id) {
-      Employee employee= entityManager.find(Employee.class,id);
-      if(employee==null){
-          return Optional.empty();
-      }
-      return Optional.of(employee);
+        Employee employee = entityManager.find(Employee.class, id);
+        if (employee == null) {
+            return Optional.empty();
+        }
+        return Optional.of(employee);
     }
 
     @Override
     public List<Employee> findAll() {
-        String queryStr="from Employee";
-        TypedQuery<Employee>query= entityManager.createQuery(queryStr,Employee.class);
+        String queryStr = "from Employee";
+        TypedQuery<Employee> query = entityManager.createQuery(queryStr, Employee.class);
         List<Employee> list = query.getResultList();
         return list;
     }

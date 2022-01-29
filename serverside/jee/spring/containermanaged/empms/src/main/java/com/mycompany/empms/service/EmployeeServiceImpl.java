@@ -54,10 +54,10 @@ public class EmployeeServiceImpl implements IEmployeeService {
     public Employee findById(long id) throws InvalidEmployeeIdException, EmployeeNotFoundException {
         validateId(id);
         Optional<Employee> optional = dao.findById(id);
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             return optional.get();
         }
-        throw new EmployeeNotFoundException("employee doesn't exist for id="+id);
+        throw new EmployeeNotFoundException("employee doesn't exist for id=" + id);
     }
 
     @Transactional(readOnly = true)
