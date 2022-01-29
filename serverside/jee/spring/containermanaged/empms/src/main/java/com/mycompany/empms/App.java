@@ -9,6 +9,6 @@ public class App {
         ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(PersistenceConfiguration.class);
         FrontEndClient frontEnd = context.getBean(FrontEndClient.class);
         frontEnd.render();
-
+        context.close();
     }
 }
