@@ -1,8 +1,16 @@
 package com.mycompany.empms.dto;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
 public class UpdateEmployeeRequest {
+    @Min(1)
     private long id;
+    @Size(min=2, max=12)
     private String name;
+    @Min(18)
+    @Max(60)
     private int age;
 
     public long getId() {

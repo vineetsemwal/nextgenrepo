@@ -17,7 +17,7 @@ public class DepartmentController {
     private IDepartmentService service;
 
     @PostMapping("/add")
-    public DepartmentDetails add(@RequestBody AddDepartmentRequest request){
+    public DepartmentDetails add(@RequestBody  AddDepartmentRequest request){
         return service.add(request);
     }
 

@@ -35,8 +35,6 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Override
     public EmployeeDetails add(AddEmployeeRequest requestData)
             throws InvalidEmployeeNameException, InvalidEmployeeAgeException, DepartmentNotFoundException {
-        validateName(requestData.getName());
-        validateAge(requestData.getAge());
         Employee employee = new Employee();
         employee.setName(requestData.getName());
         employee.setAge(requestData.getAge());
@@ -51,9 +49,6 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Override
     public Employee update(Employee employee)
             throws InvalidEmployeeNameException, InvalidEmployeeAgeException, EmployeeNotFoundException, InvalidEmployeeIdException {
-        validateName(employee.getName());
-        validateAge(employee.getAge());
-        validateId(employee.getId());
         boolean exists = employeeRepo.existsById(employee.getId());
         if (!exists) {
             throw new EmployeeNotFoundException("employee not found for id=" + employee.getId());
@@ -74,7 +69,6 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Transactional(readOnly = true)
     @Override
     public Employee findById(long id) throws InvalidEmployeeIdException, EmployeeNotFoundException {
-        validateId(id);
         Optional<Employee> optional = employeeRepo.findById(id);
         if (optional.isPresent()) {
             return optional.get();
@@ -157,22 +151,5 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     }
 
-    void validateId(long id) throws InvalidEmployeeIdException {
-        if (id <= 0) {
-            throw new InvalidEmployeeIdException("id can't be negative and zero");
-        }
-    }
-
-    void validateName(String name) throws InvalidEmployeeNameException {
-        if (name == null || name.isEmpty()) {
-            throw new InvalidEmployeeNameException("name can't be null or empty");
-        }
-    }
-
-    void validateAge(int age) throws InvalidEmployeeAgeException {
-        if (age < 18 || age > 60) {
-            throw new InvalidEmployeeAgeException("age can't be be smaller than 18 or greater than 60");
-        }
-    }
 
 }

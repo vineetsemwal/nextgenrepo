@@ -12,10 +12,17 @@ import com.mycompany.empms.service.IEmployeeService;
 import com.mycompany.empms.util.EmployeeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
+@Validated
 @RequestMapping("/employees")
 @RestController
 public class EmployeeRestController {
@@ -28,18 +35,19 @@ public class EmployeeRestController {
 
     //@RequestMapping(value="/byid/{id}", method=RequestMethod.GET)
     @GetMapping("/byid/{id}")
-    public EmployeeDetails fetchById(@PathVariable long id) throws Exception {
+    public EmployeeDetails fetchById(@PathVariable @Min(1) long id) throws Exception {
       EmployeeDetails response=service.findEmployeeDetailsById(id);
       return response;
     }
 
     @GetMapping("/bydeptid/{deptId}")
-    public List<EmployeeDetails>findEmployeesByDepartmentId(@PathVariable long deptId) throws Exception{
+    public List<EmployeeDetails>findEmployeesByDepartmentId(@PathVariable @Min(1) long deptId) throws Exception{
       return  service.findEmployeeDetailsByDepartmentId(deptId);
     }
 
+
     @GetMapping("/bydeptname/{deptName}")
-    public List<EmployeeDetails>findEmployeesByDepartmentId(@PathVariable String deptName){
+    public List<EmployeeDetails>findEmployeesByDepartmentName(@PathVariable @NotBlank @Size(min = 2,max=10)  String deptName){
        return service.findEmployeeDetailsByDepartmentName(deptName);
     }
 
@@ -50,7 +58,7 @@ public class EmployeeRestController {
     }
 
     @GetMapping("/all/paging/{pageNumber}/{blockSize}")
-    public List<EmployeeDetails> fetchAllByPaging(@PathVariable int pageNumber,@PathVariable() int blockSize){
+    public List<EmployeeDetails> fetchAllByPaging(@PathVariable @Min(0) int pageNumber, @Min(1) @PathVariable() int blockSize){
         List<EmployeeDetails>list=service.findAllEmployeesDetail( pageNumber, blockSize);
         return list;
     }
@@ -59,14 +67,14 @@ public class EmployeeRestController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/add")
     //@RequestMapping(value = "/add",method= RequestMethod.POST)
-    public EmployeeDetails add(@RequestBody AddEmployeeRequest  requestData) throws Exception{
+    public EmployeeDetails add(@RequestBody @NotNull @Valid AddEmployeeRequest  requestData) throws Exception{
        EmployeeDetails response =service.add(requestData);
        return response;
     }
 
     //@RequestMapping(value = "/add",method= RequestMethod.PUT)
     @PutMapping("/update")
-    public EmployeeDetails update(@RequestBody UpdateEmployeeRequest requestData) throws Exception{
+    public EmployeeDetails update(@RequestBody @Valid  UpdateEmployeeRequest requestData) throws Exception{
         EmployeeDetails response=service.updateEmployeeDetails(requestData);
         return response;
     }
