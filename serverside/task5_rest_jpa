@@ -1,0 +1,48 @@
+****Spring DI Use Java based configuration for DI  - Layered Architecture task, Use Spring Boot , Rest , Spring DataJpa ****
+
+Student{
+
+id: long
+
+name: String
+
+field: String
+
+}
+
+
+IStudentRepository{
+
+......
+
+}
+
+
+
+IStudentService{
+
+add(AddStudentRequest requestData) : StudentDetails
+
+/** find student in the store by id **/ 
+
+findStudentDetailsById(long id) :StudentDetails
+
+/** find students by field **/ 
+
+List< StudentDetails > (String field)
+
+}
+
+
+
+**Validations**
+
+name, field, device, language can't be empty or null  
+
+name: min 2 letters, max 10 letters
+
+field : 3 letters only
+
+id, age can't be negative, age sgould be between 17 and 22
+
+device: min 3 letters, max 10 
