@@ -1,19 +1,20 @@
 package com.mycompany.empms.service;
 
+import com.mycompany.empms.dao.IDepartmentRepository;
 import com.mycompany.empms.dao.IEmployeeRepository;
 import com.mycompany.empms.dto.AddEmployeeRequest;
 import com.mycompany.empms.dto.EmployeeDetails;
 import com.mycompany.empms.dto.UpdateEmployeeRequest;
+import com.mycompany.empms.entity.Department;
 import com.mycompany.empms.entity.Employee;
-import com.mycompany.empms.exceptions.EmployeeNotFoundException;
-import com.mycompany.empms.exceptions.InvalidEmployeeAgeException;
-import com.mycompany.empms.exceptions.InvalidEmployeeIdException;
-import com.mycompany.empms.exceptions.InvalidEmployeeNameException;
+import com.mycompany.empms.exceptions.*;
 import com.mycompany.empms.util.EmployeeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,20 +23,26 @@ import java.util.Optional;
 public class EmployeeServiceImpl implements IEmployeeService {
 
     @Autowired
-    private IEmployeeRepository repo;
+    private IEmployeeRepository employeeRepo;
+
+    @Autowired
+    private IDepartmentService departmentService;
 
     @Autowired
     private EmployeeUtil employeeUtil;
 
     @Transactional
     @Override
-    public EmployeeDetails add(AddEmployeeRequest requestData) throws InvalidEmployeeNameException, InvalidEmployeeAgeException {
+    public EmployeeDetails add(AddEmployeeRequest requestData)
+            throws InvalidEmployeeNameException, InvalidEmployeeAgeException, DepartmentNotFoundException {
         validateName(requestData.getName());
         validateAge(requestData.getAge());
         Employee employee = new Employee();
         employee.setName(requestData.getName());
         employee.setAge(requestData.getAge());
-        employee = repo.save(employee);
+        Department department=departmentService.findById(requestData.getDeptId());
+        employee.setDepartment(department);
+        employee = employeeRepo.save(employee);
         EmployeeDetails desired = employeeUtil.toEmployeeDetails(employee);
         return desired;
     }
@@ -47,11 +54,11 @@ public class EmployeeServiceImpl implements IEmployeeService {
         validateName(employee.getName());
         validateAge(employee.getAge());
         validateId(employee.getId());
-        boolean exists = repo.existsById(employee.getId());
+        boolean exists = employeeRepo.existsById(employee.getId());
         if (!exists) {
             throw new EmployeeNotFoundException("employee not found for id=" + employee.getId());
         }
-        employee = repo.save(employee);
+        employee = employeeRepo.save(employee);
         return employee;
     }
 
@@ -68,7 +75,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Override
     public Employee findById(long id) throws InvalidEmployeeIdException, EmployeeNotFoundException {
         validateId(id);
-        Optional<Employee> optional = repo.findById(id);
+        Optional<Employee> optional = employeeRepo.findById(id);
         if (optional.isPresent()) {
             return optional.get();
         }
@@ -86,32 +93,68 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Transactional(readOnly = true)
     @Override
     public List<Employee> findAll() {
-        return repo.findAll();
+        PageRequest request = PageRequest.of(0, Integer.MAX_VALUE);
+        Iterable<Employee> it = employeeRepo.findAll(request);
+        List<Employee> list = new ArrayList<>();
+        it.forEach((emp) -> list.add(emp));
+        return list;
+    }
+
+    @Override
+    public List<Employee> findAll(int pageNumber, int blockSize) {
+        PageRequest request = PageRequest.of(pageNumber, blockSize);
+        Iterable<Employee> it = employeeRepo.findAll(request);
+        List<Employee> list = new ArrayList<>();
+        it.forEach((emp) -> list.add(emp));
+        return list;
+    }
+
+    @Override
+    public List<EmployeeDetails> findAllEmployeesDetail(int pageNumber, int blockSize) {
+        List<Employee> list = findAll(pageNumber, blockSize);
+        return employeeUtil.toListEmployeesDetails(list);
     }
 
     @Override
     public List<EmployeeDetails> findAllEmployeeDetails() {
         List<Employee> employees = findAll();
-        List<EmployeeDetails> desired = employeeUtil.toListEmployees(employees);
+        List<EmployeeDetails> desired = employeeUtil.toListEmployeesDetails(employees);
         return desired;
     }
 
     @Override
     public List<Employee> fetchByName(String name) {
-        List<Employee> list = repo.findByName(name);
+        List<Employee> list = employeeRepo.findByName(name);
         return list;
     }
 
     @Override
     public List<Employee> fetchByNameAndAge(String name, int age) {
-        List<Employee> list = repo.findByNameAndAge(name, age);
+        List<Employee> list = employeeRepo.findByNameAndAge(name, age);
         return list;
     }
 
     @Override
     public List<Employee> fetchByAgeGreaterThan(int age) {
-        List<Employee> list = repo.findByAgeGreaterThan(age);
+        List<Employee> list = employeeRepo.findByAgeGreaterThan(age);
         return list;
+    }
+
+    @Override
+    public List<EmployeeDetails> findEmployeeDetailsByDepartmentId(long departmentId)
+            throws DepartmentNotFoundException {
+        Department department=departmentService.findById(departmentId);
+        List<Employee>list= employeeRepo.findByDepartment(department);
+        List<EmployeeDetails>desired=employeeUtil.toListEmployeesDetails(list);
+        return desired;
+    }
+
+    @Override
+    public List<EmployeeDetails> findEmployeeDetailsByDepartmentName(String departmentName) {
+       List<Employee>list = employeeRepo.findByDepartmentName(departmentName);
+        List<EmployeeDetails>desired=employeeUtil.toListEmployeesDetails(list);
+        return desired;
+
     }
 
     void validateId(long id) throws InvalidEmployeeIdException {

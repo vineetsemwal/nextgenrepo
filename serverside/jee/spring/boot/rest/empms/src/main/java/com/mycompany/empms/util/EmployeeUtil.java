@@ -2,6 +2,7 @@ package com.mycompany.empms.util;
 
 import com.mycompany.empms.dto.EmployeeDetails;
 import com.mycompany.empms.dto.UpdateEmployeeRequest;
+import com.mycompany.empms.entity.Department;
 import com.mycompany.empms.entity.Employee;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -33,6 +34,8 @@ public class EmployeeUtil {
     public EmployeeDetails toEmployeeDetails(Employee employee){
         EmployeeDetails details = new EmployeeDetails();
         BeanUtils.copyProperties(employee,details);
+        Department department=employee.getDepartment();
+        details.setDeptId(department.getId());
         return details;
     }
 
@@ -42,7 +45,7 @@ public class EmployeeUtil {
         return desired;
     }
 
-   public List<EmployeeDetails> toListEmployees(Collection<Employee> employees){
+   public List<EmployeeDetails> toListEmployeesDetails(Collection<Employee> employees){
        Function<Employee,EmployeeDetails>function=this::toEmployeeDetails;
       List<EmployeeDetails>desired= employees.stream().map(function).collect(Collectors.toList());
       return desired;

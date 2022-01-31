@@ -26,15 +26,32 @@ public class EmployeeRestController {
     @Autowired
     private EmployeeUtil util;
 
+    //@RequestMapping(value="/byid/{id}", method=RequestMethod.GET)
     @GetMapping("/byid/{id}")
     public EmployeeDetails fetchById(@PathVariable long id) throws Exception {
       EmployeeDetails response=service.findEmployeeDetailsById(id);
       return response;
     }
 
+    @GetMapping("/bydeptid/{deptId}")
+    public List<EmployeeDetails>findEmployeesByDepartmentId(@PathVariable long deptId) throws Exception{
+      return  service.findEmployeeDetailsByDepartmentId(deptId);
+    }
+
+    @GetMapping("/bydeptname/{deptName}")
+    public List<EmployeeDetails>findEmployeesByDepartmentId(@PathVariable String deptName){
+       return service.findEmployeeDetailsByDepartmentName(deptName);
+    }
+
     @GetMapping("/all")
     public List<EmployeeDetails> fetchAll(){
         List<EmployeeDetails>list=service.findAllEmployeeDetails();
+        return list;
+    }
+
+    @GetMapping("/all/paging/{pageNumber}/{blockSize}")
+    public List<EmployeeDetails> fetchAllByPaging(@PathVariable int pageNumber,@PathVariable() int blockSize){
+        List<EmployeeDetails>list=service.findAllEmployeesDetail( pageNumber, blockSize);
         return list;
     }
 
@@ -53,6 +70,7 @@ public class EmployeeRestController {
         EmployeeDetails response=service.updateEmployeeDetails(requestData);
         return response;
     }
+
 
 
 }

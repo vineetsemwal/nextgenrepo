@@ -6,6 +6,7 @@ package com.mycompany.empms.dto;
 public class AddEmployeeRequest {
     private String name;
     private int age;
+    private long deptId;
 
     public String getName() {
         return name;
@@ -21,5 +22,13 @@ public class AddEmployeeRequest {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public long getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(long deptId) {
+        this.deptId = deptId;
     }
 }

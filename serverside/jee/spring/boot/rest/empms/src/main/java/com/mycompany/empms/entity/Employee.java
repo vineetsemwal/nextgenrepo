@@ -1,9 +1,6 @@
 package com.mycompany.empms.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 
@@ -38,6 +35,18 @@ public class Employee {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @JoinColumn(name="deptid")
+    @ManyToOne
+    private Department department;
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     @Override
