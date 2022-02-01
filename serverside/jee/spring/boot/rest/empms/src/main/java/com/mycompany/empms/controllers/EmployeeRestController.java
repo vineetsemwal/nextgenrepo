@@ -10,6 +10,8 @@ import com.mycompany.empms.exceptions.InvalidEmployeeIdException;
 import com.mycompany.empms.exceptions.InvalidEmployeeNameException;
 import com.mycompany.empms.service.IEmployeeService;
 import com.mycompany.empms.util.EmployeeUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -27,6 +29,8 @@ import java.util.List;
 @RestController
 public class EmployeeRestController {
 
+    private static final Logger Log= LoggerFactory.getLogger(EmployeeRestController.class);
+
     @Autowired
     private IEmployeeService service;
 
@@ -35,6 +39,7 @@ public class EmployeeRestController {
     //@RequestMapping(value="/byid/{id}", method=RequestMethod.GET)
     @GetMapping("/byid/{id}")
     public EmployeeDetails fetchById(@PathVariable @Min(1) long id) throws Exception {
+      Log.info("inside fetchById() id="+id);
       EmployeeDetails response=service.findEmployeeDetailsById(id);
       return response;
     }

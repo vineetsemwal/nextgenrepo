@@ -22,7 +22,7 @@ public class CentralizedExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(EmployeeNotFoundException.class)
     public String handleEmployeeNotFound(EmployeeNotFoundException e) {
-        System.out.println("inside handleEmployeeNotFound"+e.getMessage());
+        Log.debug("inside handleEmployeeNotFound"+e.getMessage(), e);
         return e.getMessage();
     }
 
@@ -53,7 +53,7 @@ public class CentralizedExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public String handlMethodArgumentNotValidException(MethodArgumentNotValidException e){
+    public String handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
         return e.getMessage();
     }
 
@@ -61,7 +61,7 @@ public class CentralizedExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     public String handleInBlanketWay(Exception e) {
-        Log.debug("not a specific exception handle",e);
+        Log.error("not a specific exception handle",e);
         return e.getMessage();
     }
 
