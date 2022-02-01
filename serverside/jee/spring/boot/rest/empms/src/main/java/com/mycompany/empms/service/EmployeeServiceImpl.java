@@ -1,6 +1,5 @@
 package com.mycompany.empms.service;
 
-import com.mycompany.empms.dao.IDepartmentRepository;
 import com.mycompany.empms.dao.IEmployeeRepository;
 import com.mycompany.empms.dto.AddEmployeeRequest;
 import com.mycompany.empms.dto.EmployeeDetails;
@@ -35,7 +34,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Override
     public EmployeeDetails add(AddEmployeeRequest requestData)
             throws InvalidEmployeeNameException, InvalidEmployeeAgeException, DepartmentNotFoundException {
-        Employee employee = new Employee();
+        Employee employee = newEmployee();
         employee.setName(requestData.getName());
         employee.setAge(requestData.getAge());
         Department department=departmentService.findById(requestData.getDeptId());
@@ -43,6 +42,10 @@ public class EmployeeServiceImpl implements IEmployeeService {
         employee = employeeRepo.save(employee);
         EmployeeDetails desired = employeeUtil.toEmployeeDetails(employee);
         return desired;
+    }
+
+    Employee newEmployee(){
+        return new Employee();
     }
 
     @Transactional
@@ -150,6 +153,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
         return desired;
 
     }
+
 
 
 }
