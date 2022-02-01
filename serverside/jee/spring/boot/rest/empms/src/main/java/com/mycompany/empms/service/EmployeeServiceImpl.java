@@ -33,7 +33,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Transactional
     @Override
     public EmployeeDetails add(AddEmployeeRequest requestData)
-            throws InvalidEmployeeNameException, InvalidEmployeeAgeException, DepartmentNotFoundException {
+            throws  DepartmentNotFoundException {
         Employee employee = newEmployee();
         employee.setName(requestData.getName());
         employee.setAge(requestData.getAge());
@@ -51,7 +51,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Transactional
     @Override
     public Employee update(Employee employee)
-            throws InvalidEmployeeNameException, InvalidEmployeeAgeException, EmployeeNotFoundException, InvalidEmployeeIdException {
+            throws EmployeeNotFoundException {
         boolean exists = employeeRepo.existsById(employee.getId());
         if (!exists) {
             throw new EmployeeNotFoundException("employee not found for id=" + employee.getId());
@@ -62,7 +62,8 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Transactional
     @Override
-    public EmployeeDetails updateEmployeeDetails(UpdateEmployeeRequest requestData) throws InvalidEmployeeNameException, InvalidEmployeeAgeException, EmployeeNotFoundException, InvalidEmployeeIdException {
+    public EmployeeDetails updateEmployeeDetails(UpdateEmployeeRequest requestData)
+            throws EmployeeNotFoundException {
         Employee employee = employeeUtil.toEmployee(requestData);
         employee = update(employee);
         EmployeeDetails desired = employeeUtil.toEmployeeDetails(employee);
@@ -71,7 +72,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Transactional(readOnly = true)
     @Override
-    public Employee findById(long id) throws InvalidEmployeeIdException, EmployeeNotFoundException {
+    public Employee findById(long id) throws EmployeeNotFoundException {
         Optional<Employee> optional = employeeRepo.findById(id);
         if (optional.isPresent()) {
             return optional.get();
@@ -81,7 +82,7 @@ public class EmployeeServiceImpl implements IEmployeeService {
 
     @Transactional(readOnly = true)
     @Override
-    public EmployeeDetails findEmployeeDetailsById(long id) throws InvalidEmployeeIdException, EmployeeNotFoundException {
+    public EmployeeDetails findEmployeeDetailsById(long id) throws  EmployeeNotFoundException {
         Employee employee = findById(id);
         EmployeeDetails desired = employeeUtil.toEmployeeDetails(employee);
         return desired;

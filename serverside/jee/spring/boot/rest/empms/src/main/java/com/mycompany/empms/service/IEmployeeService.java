@@ -18,18 +18,18 @@ import java.util.List;
 @Validated
 public interface IEmployeeService {
 
-    EmployeeDetails add(@NotNull @Valid AddEmployeeRequest request) throws InvalidEmployeeNameException, InvalidEmployeeAgeException, DepartmentNotFoundException;
+    EmployeeDetails add(@NotNull @Valid AddEmployeeRequest request) throws  DepartmentNotFoundException;
 
     Employee update(@NotNull @Valid Employee employee)
-            throws InvalidEmployeeNameException, InvalidEmployeeAgeException, EmployeeNotFoundException, InvalidEmployeeIdException;
+            throws EmployeeNotFoundException, InvalidEmployeeIdException;
 
     EmployeeDetails updateEmployeeDetails(@NotNull @Valid UpdateEmployeeRequest requestData)
-            throws InvalidEmployeeNameException, InvalidEmployeeAgeException, EmployeeNotFoundException, InvalidEmployeeIdException;
+            throws  EmployeeNotFoundException, InvalidEmployeeIdException;
 
 
     Employee findById(@Min(1)long id) throws InvalidEmployeeIdException, EmployeeNotFoundException;
 
-    EmployeeDetails findEmployeeDetailsById(@Min(1)long id) throws InvalidEmployeeIdException, EmployeeNotFoundException;
+    EmployeeDetails findEmployeeDetailsById(@Min(1)long id) throws  EmployeeNotFoundException;
 
 
     List<Employee> findAll();

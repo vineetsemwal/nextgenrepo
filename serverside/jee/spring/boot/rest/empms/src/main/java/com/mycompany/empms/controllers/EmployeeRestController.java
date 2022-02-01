@@ -30,8 +30,7 @@ public class EmployeeRestController {
     @Autowired
     private IEmployeeService service;
 
-    @Autowired
-    private EmployeeUtil util;
+
 
     //@RequestMapping(value="/byid/{id}", method=RequestMethod.GET)
     @GetMapping("/byid/{id}")

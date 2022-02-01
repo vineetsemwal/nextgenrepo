@@ -22,6 +22,7 @@ public class CentralizedExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(EmployeeNotFoundException.class)
     public String handleEmployeeNotFound(EmployeeNotFoundException e) {
+        System.out.println("inside handleEmployeeNotFound"+e.getMessage());
         return e.getMessage();
     }
 
