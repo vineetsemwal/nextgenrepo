@@ -44,19 +44,21 @@ public class EmployeeServiceImplJpaTests {
     public void testFindById_1() throws Exception {
         String deptName="dev";
         String empName="rajiv";
+        int age=28;
         Department department = new Department();
         department.setDeptName(deptName);
         em.persist(department);
         Employee employee = new Employee();
         employee.setName(empName);
         employee.setDepartment(department);
-        employee.setAge(28);
+        employee.setAge(age);
         em.persist(employee);
         long empId = employee.getId();
         Employee result = employeeService.findById(empId);
         assertEquals(employee,result);
         assertEquals(department,result.getDepartment());
         assertEquals(empName,result.getName());
+        assertEquals(age,result.getAge());
     }
 
     /**

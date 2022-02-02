@@ -53,7 +53,7 @@ public class EmployeeRestControllerMvcTests {
     }
 
     /**
-     *  scenario: when employee does not exist , EmployeedFoundException is thrown
+     *  scenario: when employee does not exist , EmployeeNotFoundException is thrown
      *
      * @throws Exception
      */
@@ -61,12 +61,16 @@ public class EmployeeRestControllerMvcTests {
     public void testFetchById_2() throws Exception{
         long id=290;
         String expectedBody="employee not found for id="+id;
+        EmployeeNotFoundException exception=new EmployeeNotFoundException(expectedBody);
+        when(service.findEmployeeDetailsById(id)).thenThrow(exception);
+        /*
+        useful api for stubbing in case you want some functionality to execute when a method is called
         when(service.findEmployeeDetailsById(id)).thenAnswer(new Answer(){
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
                 throw new EmployeeNotFoundException(expectedBody);
             }
-        });
+        });*/
         String url="/employees/byid/"+id;
         mvc.perform(get(url)).
                 andExpect(status().isNotFound()).

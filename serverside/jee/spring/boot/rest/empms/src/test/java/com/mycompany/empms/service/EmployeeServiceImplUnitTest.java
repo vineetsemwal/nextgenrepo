@@ -41,14 +41,14 @@ class EmployeeServiceImplUnitTest {
      * expectation : expected employee will be returned
      */
     @Test
-    public void testFindById_1() throws Exception{
-        long id=1;
-       Employee expected=mock(Employee.class);
-        Optional<Employee>optional=Optional.of(expected);
-       when(employeeRepo.findById(id)).thenReturn(optional);
-       Employee result=  employeeService.findById(id);
-       assertEquals(expected, result);
-       verify(employeeRepo).findById(id);
+    public void testFindById_1() throws Exception {
+        long id = 1;
+        Employee expected = mock(Employee.class);
+        Optional<Employee> optional = Optional.of(expected);
+        when(employeeRepo.findById(id)).thenReturn(optional);
+        Employee result = employeeService.findById(id);
+        assertSame(expected, result);
+        verify(employeeRepo).findById(id);
     }
 
     /**
@@ -57,32 +57,32 @@ class EmployeeServiceImplUnitTest {
      * @throws Exception
      */
     @Test
-    public void testFindById_2() throws Exception{
-        long id=2;
-        Optional<Employee>optional=Optional.empty();
+    public void testFindById_2() throws Exception {
+        long id = 2;
+        Optional<Employee> optional = Optional.empty();
         when(employeeRepo.findById(id)).thenReturn(optional);
-        Executable execute=()->employeeService.findById(id);
+        Executable execute = () -> employeeService.findById(id);
         assertThrows(EmployeeNotFoundException.class, execute);
         verify(employeeRepo).findById(id);
     }
 
 
     @Test
-    public void testAdd_1() throws Exception{
-        AddEmployeeRequest request=new AddEmployeeRequest();
-        long deptId=10;
+    public void testAdd_1() throws Exception {
+        AddEmployeeRequest request = new AddEmployeeRequest();
+        long deptId = 10;
         request.setName("sachin");
         request.setAge(49);
         request.setDeptId(deptId);
-        Employee employee=mock(Employee.class);
+        Employee employee = mock(Employee.class);
         doReturn(employee).when(employeeService).newEmployee();
-        Department department=mock(Department.class);
+        Department department = mock(Department.class);
         when(departmentService.findById(deptId)).thenReturn(department);
         when(employeeRepo.save(employee)).thenReturn(employee);
-        EmployeeDetails details=mock(EmployeeDetails.class);
+        EmployeeDetails details = mock(EmployeeDetails.class);
         when(employeeUtil.toEmployeeDetails(employee)).thenReturn(details);
-        EmployeeDetails result=employeeService.add(request);
-        assertSame(details,result);
+        EmployeeDetails result = employeeService.add(request);
+        assertSame(details, result);
         verify(employee).setDepartment(department);
         verify(employee).setName(request.getName());
         verify(employee).setAge(request.getAge());
