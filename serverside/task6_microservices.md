@@ -1,4 +1,4 @@
-****Spring Spring Boot, microservices (use discovery server) , Spring DataJpa ****
+***Spring Spring Boot, microservices (use discovery server) , Spring DataJpa***
 
 
 **Student module**
