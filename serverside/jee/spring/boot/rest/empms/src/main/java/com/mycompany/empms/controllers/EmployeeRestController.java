@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +44,19 @@ public class EmployeeRestController {
       EmployeeDetails response=service.findEmployeeDetailsById(id);
       return response;
     }
+
+    /*
+    Another way where we are returning responsesentity,many variants for ResponseEntity constructors  are there
+     based on requirement, one of them can be used
+
+    @GetMapping("/byid/{id}")
+    public ResponseEntity<EmployeeDetails> fetchById(@PathVariable @Min(1) long id) throws Exception {
+        Log.info("inside fetchById() id="+id);
+        EmployeeDetails response=service.findEmployeeDetailsById(id);
+        ResponseEntity<EmployeeDetails>responseEntity=new ResponseEntity<>(response,HttpStatus.OK);
+        return responseEntity;
+    }
+  */
 
     @GetMapping("/bydeptid/{deptId}")
     public List<EmployeeDetails>findEmployeesByDepartmentId(@PathVariable @Min(1) long deptId) throws Exception{
