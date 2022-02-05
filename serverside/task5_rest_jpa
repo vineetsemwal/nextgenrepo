@@ -29,7 +29,7 @@ findStudentDetailsById(long id) :StudentDetails
 
 /** find students by field **/ 
 
-List< StudentDetails > (String field)
+List< StudentDetails > findByField(String field)
 
 }
 

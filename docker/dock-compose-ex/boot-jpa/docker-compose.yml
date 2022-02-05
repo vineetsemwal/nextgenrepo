@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+    
+    
+   
+    empms:
+        build: empms
+        ports:
+        - 8585:8585
+     
+  
+
+    mysqlsrvc:
+        image: mysql:8.0.26
+        ports:
+        - 3306:3306
+        restart: always
+        environment:
+            #MYSQL_USER: scooby
+            MYSQL_ROOT_PASSWORD: scooby
+            MYSQL_DATABASE: empdb
+
+
+ 
