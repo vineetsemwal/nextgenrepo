@@ -1,0 +1,32 @@
+apiVersion: apps/v1 #version of the Kubernetes API you're using to create this object
+kind: Deployment  #What kind of object you want to create
+metadata: #Data that helps uniquely identify the object
+   name: mysqlsrvc
+
+spec: #What state you desire for the object
+  selector:
+    matchLabels:
+      app: mysqlsrvc 
+
+
+  replicas: 1 # tells deployment to run 1 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: mysqlsrvc
+    spec:   #What state you desire for the object
+
+      containers:
+      - name:  mysqlsrvc #container name
+        image: mysql:8.0.26 #image name
+        ports:
+        - containerPort: 3306 # postgres runs on port 5432
+        
+        env:               
+           
+           
+            - name: MYSQL_ROOT_PASSWORD
+              value:  scooby
+             
+            - name: MYSQL_DATABASE
+              value: empdb
